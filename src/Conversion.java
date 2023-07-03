@@ -9,7 +9,13 @@ public class Conversion {
             rules.put(source, neighbors);
         }
         rules.get(source).put(destination, conversion);
-        System.out.println(rules);
+
+        // add inverse
+        if (!rules.containsKey(destination)) {
+            Map<String, Double> neighbors = new HashMap<>();
+            rules.put(destination, neighbors);
+        }
+        rules.get(destination).put(source, 1.0 / conversion);
     }
 
     public static double getRule(Map<String, Map<String, Double>> rules, String source, String destination) {
@@ -58,6 +64,7 @@ public class Conversion {
         }
 
         // calculate
+        System.out.print("Path to conversion: " + path + " ");
         double factor = 1;
         String start = path.pop();
         while (!path.isEmpty()) {
@@ -73,14 +80,36 @@ public class Conversion {
         Map<String, Map<String, Double>> rules = new HashMap<>();
         addRule(rules, "feet", "inches", 12);
         addRule(rules, "hours", "minutes", 60);
-        addRule(rules, "inches", "feet",  1.0/12.0);
-        addRule(rules, "minutes", "hours", 1.0/60);
         addRule(rules, "yards", "feet", 3);
-        addRule(rules, "feet", "yards", 1.0/3);
+        addRule(rules, "km", "mile", 0.6213712);
+        addRule(rules, "km", "meters", 1000);
+        addRule(rules, "yards", "meters", 0.9144);
+        addRule(rules, "furlong", "meters", 201.0);
+        addRule(rules, "Angstrom", "nanometer", 0.1);
+        addRule(rules, "mm", "micrometer", 1000.0);
+        addRule(rules, "micrometer", "nanometer", 1000.0);
+        addRule(rules, "nm", "mile", 1.150779);
+        addRule(rules, "yards", "rod", 5.5);
 
-        String source = "yards";
-        String dest = "inches";
+
+        String source = "nm";
+        String dest = "rod";
         double factor = getRule(rules, source, dest );
-        System.out.print("From " + source + " to " + dest + " = " +factor);
+        System.out.println("From " + source + " to " + dest + " = " + String.format("%.2f",factor));
+
+        source = "mile";
+        dest = "feet";
+        factor = getRule(rules, source, dest );
+        System.out.println("From " + source + " to " + dest + " = " + String.format("%.2f",factor));
+
+        source = "meters";
+        dest = "inches";
+        factor = getRule(rules, source, dest );
+        System.out.println("From " + source + " to " + dest + " = " + String.format("%.2f",factor));
+
+        source = "mile";
+        dest = "furlong";
+        factor = getRule(rules, source, dest );
+        System.out.println("From " + source + " to " + dest + " = " + String.format("%.2f",factor));
     }
 }
