@@ -1,7 +1,7 @@
 import java.util.*;
 import java.util.HashMap;
 
-public class Main {
+public class Conversion {
 
     public static void addRule(Map<String, Map<String, Double>> rules, String source, String destination, double conversion) {
         if (!rules.containsKey(source)) {
@@ -63,7 +63,6 @@ public class Main {
         while (!path.isEmpty()) {
             String end = path.pop();
             Map<String, Double> neighbors = rules.get(start);
-            System.out.println("New factor: " + start + " " + end);
             factor *= neighbors.get(end);
             start = end;
         }
@@ -79,7 +78,9 @@ public class Main {
         addRule(rules, "yards", "feet", 3);
         addRule(rules, "feet", "yards", 1.0/3);
 
-        double factor = getRule(rules, "yards", "inches" );
-        System.out.print(factor);
+        String source = "yards";
+        String dest = "inches";
+        double factor = getRule(rules, source, dest );
+        System.out.print("From " + source + " to " + dest + " = " +factor);
     }
 }
