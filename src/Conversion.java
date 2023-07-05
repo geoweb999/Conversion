@@ -78,22 +78,21 @@ public class Conversion {
     public static void main(String[] args) {
 
         Map<String, Map<String, Double>> rules = new HashMap<>();
-        addRule(rules, "feet", "inches", 12);
-        addRule(rules, "hours", "minutes", 60);
-        addRule(rules, "yards", "feet", 3);
+        addRule(rules, "feet", "inch", 12);
+        addRule(rules, "hour", "minute", 60);
+        addRule(rules, "yard", "feet", 3);
         addRule(rules, "km", "mile", 0.6213712);
-        addRule(rules, "km", "meters", 1000);
-        addRule(rules, "yards", "meters", 0.9144);
-        addRule(rules, "furlong", "meters", 201.0);
+        addRule(rules, "km", "meter", 1000);
+        addRule(rules, "yard", "meter", 0.9144);
+        addRule(rules, "furlong", "meter", 201.0);
         addRule(rules, "Angstrom", "nanometer", 0.1);
         addRule(rules, "mm", "micrometer", 1000.0);
         addRule(rules, "micrometer", "nanometer", 1000.0);
         addRule(rules, "nm", "mile", 1.150779);
-        addRule(rules, "rod", "yards", 5.5);
-        addRule(rules, "year", "days", 365);
-        addRule(rules, "days", "hours", 24);
-        addRule(rules, "hours", "minutes", 60);
-        addRule(rules, "minutes", "seconds", 60);
+        addRule(rules, "rod", "yard", 5.5);
+        addRule(rules, "year", "day", 365);
+        addRule(rules, "day", "hour", 24);
+        addRule(rules, "minute", "second", 60);
 
 
         String source = "mile";
@@ -106,8 +105,8 @@ public class Conversion {
         factor = getRule(rules, source, dest );
         System.out.println("From " + source + " to " + dest + " = " + String.format("%.2f",factor));
 
-        source = "meters";
-        dest = "inches";
+        source = "meter";
+        dest = "inch";
         factor = getRule(rules, source, dest );
         System.out.println("From " + source + " to " + dest + " = " + String.format("%.2f",factor));
 
@@ -117,7 +116,7 @@ public class Conversion {
         System.out.println("From " + source + " to " + dest + " = " + String.format("%.2f",factor));
 
         source = "year";
-        dest = "seconds";
+        dest = "second";
         factor = getRule(rules, source, dest );
         System.out.println("From " + source + " to " + dest + " = " + String.format("%.2f",factor));
     }
