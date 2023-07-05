@@ -89,10 +89,14 @@ public class Conversion {
         addRule(rules, "mm", "micrometer", 1000.0);
         addRule(rules, "micrometer", "nanometer", 1000.0);
         addRule(rules, "nm", "mile", 1.150779);
-        addRule(rules, "yards", "rod", 5.5);
+        addRule(rules, "rod", "yards", 5.5);
+        addRule(rules, "year", "days", 365);
+        addRule(rules, "days", "hours", 24);
+        addRule(rules, "hours", "minutes", 60);
+        addRule(rules, "minutes", "seconds", 60);
 
 
-        String source = "nm";
+        String source = "mile";
         String dest = "rod";
         double factor = getRule(rules, source, dest );
         System.out.println("From " + source + " to " + dest + " = " + String.format("%.2f",factor));
@@ -109,6 +113,11 @@ public class Conversion {
 
         source = "mile";
         dest = "furlong";
+        factor = getRule(rules, source, dest );
+        System.out.println("From " + source + " to " + dest + " = " + String.format("%.2f",factor));
+
+        source = "year";
+        dest = "seconds";
         factor = getRule(rules, source, dest );
         System.out.println("From " + source + " to " + dest + " = " + String.format("%.2f",factor));
     }
